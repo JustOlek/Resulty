@@ -1,5 +1,4 @@
-﻿using Resulty.Errors;
-using System;
+﻿using System;
 
 namespace Resulty
 {

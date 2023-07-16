@@ -1,4 +1,4 @@
-﻿namespace Resulty.Errors
+﻿namespace Resulty
 {
     /// <summary>
     /// Represents an operation error with a custom status code and an error message

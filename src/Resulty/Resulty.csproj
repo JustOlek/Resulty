@@ -4,13 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/alex-selehenenko/Resulty</RepositoryUrl>
+    <PackageId>Resulty</PackageId>
+    <Title>Resulty</Title>
+    <Authors>Oleksandr Selehenenko</Authors>
+    <Description>A lightweight library for easier error handling and result transformations in .NET</Description>
+    <PackageTags>result dotnet pattern</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Version>1.0.0</Version>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="..\..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
 
 </Project>
