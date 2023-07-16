@@ -1,9 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Resulty.UnitTests
 {
@@ -32,6 +27,34 @@ namespace Resulty.UnitTests
                 Assert.That(result.IsSuccess, Is.False);
                 Assert.That(result.IsFailure, Is.True);
                 Assert.That(result.Error, Is.Not.Null);
+            });
+        }
+
+        [Test]
+        public void SuccessfulResultOfTWithNullValue_IsSucessTrueAndValueIsNull()
+        {
+            var result = Result.Success<object>(null);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.IsSuccess, Is.True);
+                Assert.That(result.IsFailure, Is.False);
+                Assert.That(result.Error, Is.Null);
+                Assert.That(result.Value, Is.Null);
+            });
+        }
+
+        [Test]
+        public void SuccessfulResultOfT_IsSucessTrueAndValueNotNull()
+        {
+            var result = Result.Success<object>("");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.IsSuccess, Is.True);
+                Assert.That(result.IsFailure, Is.False);
+                Assert.That(result.Error, Is.Null);
+                Assert.That(result.Value, Is.Not.Null);
             });
         }
     }
