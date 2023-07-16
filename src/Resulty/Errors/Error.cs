@@ -6,9 +6,9 @@
     public class Error
     {
         /// <summary>
-        /// Gets an error specific status code 
+        /// Gets an error specific code 
         /// </summary>
-        public int StatusCode { get; }
+        public int Code { get; }
 
         /// <summary>
         /// Gets a message describing the error
@@ -19,10 +19,10 @@
         /// Initializes a new instance of <see cref="Error"/> with specific parameters.
         /// </summary>
         /// <param name="message">Error message.</param>
-        /// <param name="code">Error status code.</param>
-        public Error(string message, int statusCode)
+        /// <param name="code">Error code.</param>
+        public Error(string message, int code)
         {
-            StatusCode = statusCode;
+            Code = code;
             Message = message;
         }
     }
