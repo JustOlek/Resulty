@@ -11,6 +11,12 @@ namespace Resulty.UnitTests
         {
             Assert.Throws<ArgumentException>(() => BrokenResult.WithSuccessAndError());
         }
+
+        [Test]
+        public void WithFailureAndNullError_ThrowsArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() => BrokenResult.WithFailureAndNullError());
+        }
     }
 
     public class BrokenResult : Result
@@ -20,5 +26,7 @@ namespace Resulty.UnitTests
         }
 
         public static BrokenResult WithSuccessAndError() => new(true, new Error("", 1));
+
+        public static BrokenResult WithFailureAndNullError() => new(false, null);
     }
 }
