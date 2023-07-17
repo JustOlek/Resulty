@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set package version
+      id: set_version
+      run: |
+        TAG=$(git describe --tags --abbrev=0)
+        VERSION=${TAG#v} # Remove 'v' prefix if present
+
+        echo "::set-output name=package_version::${VERSION}"
+
+    - name: Build and pack NuGet package
+      run: |
+        dotnet build
+        dotnet pack --configuration Release -p:PackageVersion=${{ steps.set_version.outputs.package_version }} --output "src/Resulty/bin/Release/"
+
+    - name: Publish NuGet package to NuGet.org
+      run: |
+        dotnet nuget push "src/Resulty/bin/Release/Resulty.${{ steps.set_version.outputs.package_version }}.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }}
