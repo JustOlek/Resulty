@@ -2,10 +2,10 @@
 
 namespace Resulty.UnitTests
 {
-    public class ResultFactoryMethods
+    public class ResultFactories
     {
         [Test]
-        public void SuccessfulResult_IsSuccessTrueAndErrorIsNull()
+        public void Success_IsSuccessTrueAndErrorIsNull()
         {
             var result = Result.Success();
             
@@ -18,7 +18,7 @@ namespace Resulty.UnitTests
         }
 
         [Test]
-        public void FailedResult_IsSuccessFalseAndErrorIsNotNull()
+        public void Failure_IsSuccessFalseAndErrorIsNotNull()
         {
             var result = Result.Failure(new("", 0));
 
@@ -31,7 +31,7 @@ namespace Resulty.UnitTests
         }
 
         [Test]
-        public void SuccessfulResultOfTWithNullValue_IsSucessTrueAndValueIsNull()
+        public void SuccessWithNullValue_IsSucessTrueAndValueIsNull()
         {
             var result = Result.Success<object>(null);
 
@@ -45,7 +45,7 @@ namespace Resulty.UnitTests
         }
 
         [Test]
-        public void SuccessfulResultOfT_IsSucessTrueAndValueNotNull()
+        public void SuccessWithValue_IsSucessTrueAndValueNotNull()
         {
             var result = Result.Success<object>("");
 

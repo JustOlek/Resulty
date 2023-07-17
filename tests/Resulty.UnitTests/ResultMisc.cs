@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 namespace Resulty.UnitTests
 {
-    public class ResultOfTValue
+    public class ResultMisc
     {
         [Test]
-        public void FailedResult_ThrowInvalidOperationException()
+        public void GetValueFromFailedResult_ThrowInvalidOperationException()
         {
             var result = Result.Failure<object>(new Error("", 1));
 
