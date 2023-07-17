@@ -20,7 +20,7 @@
         /// </summary>
         /// <param name="message">Error message.</param>
         /// <param name="code">Error code.</param>
-        public Error(string message, int code)
+        public Error(string message, int code = -1)
         {
             Code = code;
             Message = message;
