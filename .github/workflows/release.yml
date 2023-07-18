@@ -21,11 +21,14 @@ jobs:
 
         echo "::set-output name=package_version::${VERSION}"
 
-    - name: Build and pack NuGet package
-      run: |
-        dotnet build
-        dotnet pack --configuration Release -p:PackageVersion=${{ steps.set_version.outputs.package_version }} --output "src/Resulty/bin/Release/"
+    - name: Install dependencies
+      run: dotnet restore
 
-    - name: Publish NuGet package to NuGet.org
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Publish Resulty to NuGet
       run: |
-        dotnet nuget push "src/Resulty/bin/Release/Resulty.${{ steps.set_version.outputs.package_version }}.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }}
+        rm -rf nuget/
+        dotnet pack --no-build src/Resulty/Resulty.csproj --configuration Release -p:PackageVersion=${{ steps.set_version.outputs.package_version }} --output nuget
+        dotnet nuget push nuget/*.nupkg --skip-duplicate --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }}
