@@ -14,7 +14,12 @@ Result failureResult = Result.Failure(new Error("An error occurred"));
 Result<int> failureResultWithValue = Result.Failure<int>(new Error("An error occurred"));
 ```
 ### Error Codes
-It is possible to add additional identifiers to `Error.cs` using property `Code`. This can be useful, for example, when associating HTTP status codes with errors. Some of the common HTTP status codes are implemented in the static factory methods of the `Result.cs`:
+It is possible to add additional identifiers to `Error.cs` using property `Code`. By default the code value is -1.
+```csharp
+var error = new Error(message: "An error occurred", code: -5);
+return Result.Failure(error);
+```
+Error codes can be useful, for example, when associating HTTP status codes with errors. Some of the common HTTP status codes are implemented in the static factory methods of the `Result.cs`:
 ```csharp
 Result notFoundResult = Result.NotFound();
 Result<string> badRequestResult = Result.BadRequest("Invalid request data");
