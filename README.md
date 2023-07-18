@@ -1,5 +1,6 @@
 # Resulty
 [![Nuget downloads](https://img.shields.io/nuget/v/resulty.svg)](https://www.nuget.org/packages/Resulty/)
+[![Nuget](https://img.shields.io/nuget/dt/resulty)](https://www.nuget.org/packages/Resulty/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/alex-selehenenko/Resulty/blob/master/LICENSE)
 
 Result object implementation for handling success and failure outcomes.
