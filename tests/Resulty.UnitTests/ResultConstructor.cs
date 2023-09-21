@@ -24,7 +24,7 @@ namespace Resulty.UnitTests
         {
         }
 
-        public static BrokenResult WithSuccessAndError() => new(true, new Error("", 1));
+        public static BrokenResult WithSuccessAndError() => new(true, new Error());
 
         public static BrokenResult WithFailureAndNullError() => new(false, null);
     }

@@ -20,7 +20,7 @@ namespace Resulty.UnitTests
         [Test]
         public void Failure_IsSuccessFalseAndErrorIsNotNull()
         {
-            var result = Result.Failure(new("", 0));
+            var result = Result.Failure(new());
 
             Assert.Multiple(() =>
             {

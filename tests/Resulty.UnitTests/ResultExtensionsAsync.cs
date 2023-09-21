@@ -169,7 +169,7 @@ namespace Resulty.UnitTests
 
         private static async Task<Result<string>> FailureFromIntToStringAsync(int value)
         {
-            return await Task.FromResult(Result.Failure<string>(new("", 1)));
+            return await Task.FromResult(Result.Failure<string>(new()));
         }
 
         private static async Task<Result<object>> CreateSuccessTypedResultAsync()
@@ -204,22 +204,22 @@ namespace Resulty.UnitTests
 
         private static async Task<Result<object>> FailureFromBaseToTypedAsync()
         {
-            return await Task.FromResult(Result.Failure<object>(new("", 0)));
+            return await Task.FromResult(Result.Failure<object>(new()));
         }
 
         private async static Task<Result> FailureFromTypedToBaseAsync(object value)
         {
-            return await Task.FromResult(Result.Failure(new("", 0)));
+            return await Task.FromResult(Result.Failure(new()));
         }
 
         private async static Task<Result> FailureFromBaseToBaseAsync()
         {
-            return await Task.FromResult(Result.Failure(new("", 0)));
+            return await Task.FromResult(Result.Failure(new()));
         }
 
         private async static Task<Result<object>> FailureFromTypedToTypedAsync(object value)
         {
-            return await Task.FromResult(Result.Failure<object>(new("", 0)));
+            return await Task.FromResult(Result.Failure<object>(new()));
         }
     }
 }

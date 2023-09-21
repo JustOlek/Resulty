@@ -168,7 +168,7 @@ namespace Resulty.UnitTests
 
         private static Result<string> FailureFromIntToString(int value)
         {
-            return Result.Failure<string>(new("", 1));
+            return Result.Failure<string>(new());
         }
 
         private static Result<object> CreateSuccessTypedResult()
@@ -203,22 +203,22 @@ namespace Resulty.UnitTests
 
         private static Result<object> FailureFromBaseToTyped()
         {
-            return Result.Failure<object>(new("", 0));
+            return Result.Failure<object>(new());
         }
 
         private static Result FailureFromTypedToBase(object value)
         {
-            return Result.Failure(new("", 0));
+            return Result.Failure(new());
         }
 
         private static Result FailureFromBaseToBase()
         {
-            return Result.Failure(new("", 0));
+            return Result.Failure(new());
         }
 
         private static Result<object> FailureFromTypedToTyped(object value)
         {
-            return Result.Failure<object>(new("", 0));
+            return Result.Failure<object>(new());
         }
     }
 }

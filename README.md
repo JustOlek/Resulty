@@ -11,21 +11,10 @@ Result object implementation for handling success and failure outcomes.
 Result successResult = Result.Success();
 Result<string> successResultWithValue = Result.Success("Hello, world!");
 
-Result failureResult = Result.Failure(new Error("An error occurred"));
-Result<int> failureResultWithValue = Result.Failure<int>(new Error("An error occurred"));
+Result failureResult = Result.Failure(new Error());
+Result<int> failureResultWithValue = Result.Failure<int>(new Error());
 ```
-### Error Codes
-It is possible to add additional identifiers to `Error.cs` using property `Code`. By default the code value is -1.
-```csharp
-var error = new Error(message: "An error occurred", code: -5);
-return Result.Failure(error);
-```
-Error codes can be useful, for example, when associating HTTP status codes with errors. Some of the common HTTP status codes are implemented in the static factory methods of the `Result.cs`:
-```csharp
-Result notFoundResult = Result.NotFound();
-Result<string> badRequestResult = Result.BadRequest("Invalid request data");
-Result conflictResult = Result.Conflict();
-```
+
 ### Chaining Results
 Operations can be chained together using `Then` extension method. If any operation in the chain fails, subsequent operations will not be executed, and a failed result will be returned. 
 ```csharp
@@ -45,7 +34,7 @@ Result<string> transformedResult = result.ThenWithTransform(code => Result.Succe
 string message = SomeOperation()
     .Map(
         onSuccess: data => "Success: " + data.ToString(),
-        onError: error => "Error occurred: " + error.Message
+        onError: error => "Error occurred: " + error.Detail
     );
 
 ```
