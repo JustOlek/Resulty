@@ -6,7 +6,7 @@ namespace Resulty.UnitTests
         [Test]
         public void GetValueFromFailedResult_ThrowInvalidOperationException()
         {
-            var result = Result.Failure<object>(new Error("", 1));
+            var result = Result.Failure<object>(new Error());
 
             Assert.Throws<InvalidOperationException>(() =>
             {

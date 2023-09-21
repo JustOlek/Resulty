@@ -6,24 +6,18 @@
     public class Error
     {
         /// <summary>
-        /// Gets an error specific code 
+        /// Gets an error type
         /// </summary>
-        public int Code { get; }
+        public string Type { get; set; }
 
         /// <summary>
-        /// Gets a message describing the error
+        /// Gets an error title
         /// </summary>
-        public string Message { get; }
+        public string Title { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Error"/> with specific parameters.
+        /// Gets detailed description of the error
         /// </summary>
-        /// <param name="message">Error message.</param>
-        /// <param name="code">Error code.</param>
-        public Error(string message, int code = -1)
-        {
-            Code = code;
-            Message = message;
-        }
+        public string Detail { get; set; }
     }
 }
