@@ -161,12 +161,12 @@ namespace Resulty.UnitTests
             return Result.Success(0);
         }
 
-        private static Result<string> SuccessFromIntToString(int value)
+        private static Result<string> SuccessFromIntToString(Result<int> result)
         {
             return Result.Success("");
         }
 
-        private static Result<string> FailureFromIntToString(int value)
+        private static Result<string> FailureFromIntToString(Result<int> result)
         {
             return Result.Failure<string>(new());
         }
@@ -181,22 +181,22 @@ namespace Resulty.UnitTests
             return Result.Success();
         }
 
-        private static Result<object> SuccessFromBaseToTyped()
+        private static Result<object> SuccessFromBaseToTyped(Result result)
         {
             return Result.Success(new object());
         }
 
-        private static Result SuccessFromTypedToBase(object value)
+        private static Result SuccessFromTypedToBase(Result<object> res)
         {
             return Result.Success();
         }
 
-        private static Result SuccessFromBaseToBase()
+        private static Result SuccessFromBaseToBase(Result result)
         {
             return Result.Success();
         }
 
-        private static Result<object> SuccessFromTypedToTyped(object value)
+        private static Result<object> SuccessFromTypedToTyped(Result<object> res)
         {
             return Result.Success(new object());
         }
@@ -211,12 +211,12 @@ namespace Resulty.UnitTests
             return Result.Failure(new());
         }
 
-        private static Result FailureFromBaseToBase()
+        private static Result FailureFromBaseToBase(Result result)
         {
             return Result.Failure(new());
         }
 
-        private static Result<object> FailureFromTypedToTyped(object value)
+        private static Result<object> FailureFromTypedToTyped(Result<object> res)
         {
             return Result.Failure<object>(new());
         }

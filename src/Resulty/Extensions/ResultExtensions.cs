@@ -11,10 +11,10 @@ namespace Resulty
         /// <param name="task">The task representing a result.</param>
         /// <param name="next">The function that will be invoked in the chain if the result is successful.</param>
         /// <returns>A task representing the result of the operation.</returns>
-        public static async Task<Result> ThenAsync(this Task<Result> task, Func<Task<Result>> next)
+        public static async Task<Result> ThenAsync(this Task<Result> task, Func<Result, Task<Result>> next)
         {
             var result = await task;
-            return result.IsSuccess ? await next() : result;
+            return result.IsSuccess ? await next(result) : result;
         }
 
         /// <summary>
@@ -24,10 +24,10 @@ namespace Resulty
         /// <param name="task">The task representing a typed result.</param>
         /// <param name="next">The function that will be invoked in the chain if the result is successful.</param>
         /// <returns>A task representing the typed result of the operation.</returns>
-        public static async Task<Result<T>> ThenAsync<T>(this Task<Result<T>> task, Func<T, Task<Result<T>>> next)
+        public static async Task<Result<T>> ThenAsync<T>(this Task<Result<T>> task, Func<Result<T>, Task<Result<T>>> next)
         {
             var result = await task;
-            return result.IsSuccess ? await next(result.Value) : result;
+            return result.IsSuccess ? await next(result) : result;
         }
 
         /// <summary>
@@ -37,10 +37,10 @@ namespace Resulty
         /// <param name="task">The task representing a typed result.</param>
         /// <param name="next">The function that will be invoked in the chain if the result is successful.</param>
         /// <returns>A task representing the result of the operation.</returns>
-        public static async Task<Result> ThenAsync<T>(this Task<Result<T>> task, Func<T, Task<Result>> next)
+        public static async Task<Result> ThenAsync<T>(this Task<Result<T>> task, Func<Result<T>, Task<Result>> next)
         {
             var result = await task;
-            return result.IsSuccess ? await next(result.Value) : result;
+            return result.IsSuccess ? await next(result) : result;
         }
 
         /// <summary>
@@ -64,10 +64,10 @@ namespace Resulty
         /// <param name="task">The task representing a typed result.</param>
         /// <param name="next">The function that will be invoked in the chain if the result is successful.</param>
         /// <returns>A task representing the transformed typed result of the operation.</returns>
-        public static async Task<Result<TOut>> ThenWithTransformAsync<TIn, TOut>(this Task<Result<TIn>> task, Func<TIn, Task<Result<TOut>>> next)
+        public static async Task<Result<TOut>> ThenWithTransformAsync<TIn, TOut>(this Task<Result<TIn>> task, Func<Result<TIn>, Task<Result<TOut>>> next)
         {
             var result = await task;
-            return result.IsSuccess ? await next(result.Value) : Result.Failure<TOut>(result.Error);
+            return result.IsSuccess ? await next(result) : Result.Failure<TOut>(result.Error);
         }
 
         /// <summary>
@@ -76,9 +76,9 @@ namespace Resulty
         /// <param name="result">The result.</param>
         /// <param name="next">The function that will be invoked in the chain if the result is successful.</param>
         /// <returns>The result of the operation.</returns>
-        public static Result Then(this Result result, Func<Result> next)
+        public static Result Then(this Result result, Func<Result, Result> next)
         {
-            return result.IsSuccess ? next() : result;
+            return result.IsSuccess ? next(result) : result;
         }
 
         /// <summary>
@@ -87,9 +87,9 @@ namespace Resulty
         /// <param name="result">The result.</param>
         /// <param name="next">The function that will be invoked in the chain if the result is successful.</param>
         /// <returns>The result of the operation.</returns>
-        public static Result<T> Then<T>(this Result<T> result, Func<T, Result<T>> next)
+        public static Result<T> Then<T>(this Result<T> result, Func<Result<T>, Result<T>> next)
         {
-            return result.IsSuccess ? next(result.Value) : result;
+            return result.IsSuccess ? next(result) : result;
         }
 
         /// <summary>
@@ -98,9 +98,9 @@ namespace Resulty
         /// <param name="result">The result.</param>
         /// <param name="next">The function that will be invoked in the chain if the result is successful.</param>
         /// <returns>The result of the operation.</returns>
-        public static Result<T> Then<T>(this Result result, Func<Result<T>> next)
+        public static Result<T> Then<T>(this Result result, Func<Result, Result<T>> next)
         {
-            return result.IsSuccess ? next() : Result.Failure<T>(result.Error);
+            return result.IsSuccess ? next(result) : Result.Failure<T>(result.Error);
         }
 
         /// <summary>
@@ -109,9 +109,9 @@ namespace Resulty
         /// <param name="result">The result.</param>
         /// <param name="next">The function that will be invoked in the chain if the result is successful.</param>
         /// <returns>The result of the operation.</returns>
-        public static Result Then<T>(this Result<T> result, Func<T, Result> next)
+        public static Result Then<T>(this Result<T> result, Func<Result<T>, Result> next)
         {
-            return result.IsSuccess ? next(result.Value) : Result.Failure(result.Error);
+            return result.IsSuccess ? next(result) : Result.Failure(result.Error);
         }
 
         /// <summary>
@@ -122,9 +122,9 @@ namespace Resulty
         /// <param name="result">The typed result.</param>
         /// <param name="transform">The function that will be invoked in the chain to transform the result.</param>
         /// <returns>The transformed typed result of the operation.</returns>
-        public static Result<TOut> ThenWithTransform<TIn, TOut>(this Result<TIn> result, Func<TIn, Result<TOut>> transform)
+        public static Result<TOut> ThenWithTransform<TIn, TOut>(this Result<TIn> result, Func<Result<TIn>, Result<TOut>> transform)
         {
-            return result.IsSuccess ? transform(result.Value) : Result.Failure<TOut>(result.Error);
+            return result.IsSuccess ? transform(result) : Result.Failure<TOut>(result.Error);
         }
 
         /// <summary>
